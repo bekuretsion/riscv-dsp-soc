@@ -20,6 +20,8 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_decoder___024root final : public Verilate
     CData/*4:0*/ tb_decoder__DOT__rd_addr;
     CData/*0:0*/ tb_decoder__DOT__alu_src;
     CData/*0:0*/ tb_decoder__DOT__reg_write;
+    CData/*0:0*/ tb_decoder__DOT__mem_write;
+    CData/*0:0*/ tb_decoder__DOT__mem_to_reg;
     CData/*3:0*/ tb_decoder__DOT__alu_ctrl;
     CData/*0:0*/ __VstlFirstIteration;
     CData/*0:0*/ __VactContinue;

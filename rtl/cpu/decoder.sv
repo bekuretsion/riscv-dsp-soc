@@ -9,6 +9,9 @@ module decoder (
 
     output logic        alu_src,
     output logic        reg_write,
+    output logic        mem_write,
+    output logic        mem_to_reg,
+
     output logic [3:0]  alu_ctrl
 );
 
@@ -25,15 +28,16 @@ module decoder (
 
     always_comb begin
 
-        immediate = 32'd0;
-        alu_src   = 1'b0;
-        reg_write = 1'b0;
-        alu_ctrl  = 4'b0000;
+        immediate  = 32'd0;
+        alu_src    = 1'b0;
+        reg_write  = 1'b0;
+        mem_write  = 1'b0;
+        mem_to_reg = 1'b0;
+        alu_ctrl   = 4'b0000;
 
         case (opcode)
 
-            // R-Type
-            // ADD / SUB
+            // R-Type: ADD / SUB
             7'b0110011: begin
 
                 reg_write = 1'b1;
@@ -42,12 +46,10 @@ module decoder (
                 case (funct3)
 
                     3'b000: begin
-
                         if (funct7 == 7'b0100000)
                             alu_ctrl = 4'b0001; // SUB
                         else
                             alu_ctrl = 4'b0000; // ADD
-
                     end
 
                     default:
@@ -58,33 +60,61 @@ module decoder (
             end
 
 
-            // I-Type arithmetic
-            // ADDI
+            // I-Type arithmetic: ADDI
             7'b0010011: begin
 
                 reg_write = 1'b1;
                 alu_src   = 1'b1;
 
-                // Sign-extend 12-bit immediate
                 immediate = {
                     {20{instruction[31]}},
                     instruction[31:20]
                 };
 
-                case (funct3)
-
-                    3'b000:
-                        alu_ctrl = 4'b0000; // ADDI
-
-                    default:
-                        alu_ctrl = 4'b0000;
-
-                endcase
+                alu_ctrl = 4'b0000;
 
             end
 
+
+            // LW
+            7'b0000011: begin
+
+                reg_write  = 1'b1;
+                alu_src    = 1'b1;
+                mem_to_reg = 1'b1;
+
+                immediate = {
+                    {20{instruction[31]}},
+                    instruction[31:20]
+                };
+
+                alu_ctrl = 4'b0000; // address = rs1 + immediate
+
+            end
+
+
+            // SW
+            7'b0100011: begin
+
+                reg_write = 1'b0;
+                alu_src   = 1'b1;
+                mem_write = 1'b1;
+
+                // S-type immediate
+                immediate = {
+                    {20{instruction[31]}},
+                    instruction[31:25],
+                    instruction[11:7]
+                };
+
+                alu_ctrl = 4'b0000; // address = rs1 + immediate
+
+            end
+
+
             default: begin
                 reg_write = 1'b0;
+                mem_write = 1'b0;
             end
 
         endcase

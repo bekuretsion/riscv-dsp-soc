@@ -144,5 +144,7 @@ VL_ATTR_COLD void Vtb_decoder___024root___ctor_var_reset(Vtb_decoder___024root* 
     vlSelf->tb_decoder__DOT__immediate = VL_RAND_RESET_I(32);
     vlSelf->tb_decoder__DOT__alu_src = VL_RAND_RESET_I(1);
     vlSelf->tb_decoder__DOT__reg_write = VL_RAND_RESET_I(1);
+    vlSelf->tb_decoder__DOT__mem_write = VL_RAND_RESET_I(1);
+    vlSelf->tb_decoder__DOT__mem_to_reg = VL_RAND_RESET_I(1);
     vlSelf->tb_decoder__DOT__alu_ctrl = VL_RAND_RESET_I(4);
     }

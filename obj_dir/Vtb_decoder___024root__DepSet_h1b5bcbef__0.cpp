@@ -35,43 +35,223 @@ VL_INLINE_OPT void Vtb_decoder___024root___act_sequent__TOP__0(Vtb_decoder___024
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_decoder___024root___act_sequent__TOP__0\n"); );
     auto& vlSelfRef = std::ref(*vlSelf).get();
     // Body
-    vlSelfRef.tb_decoder__DOT__immediate = 0U;
-    if ((0x33U != (0x7fU & vlSelfRef.tb_decoder__DOT__instruction))) {
-        if ((0x13U == (0x7fU & vlSelfRef.tb_decoder__DOT__instruction))) {
-            vlSelfRef.tb_decoder__DOT__immediate = 
-                (((- (IData)((vlSelfRef.tb_decoder__DOT__instruction 
-                              >> 0x1fU))) << 0xcU) 
-                 | (vlSelfRef.tb_decoder__DOT__instruction 
-                    >> 0x14U));
-        }
-    }
-    vlSelfRef.tb_decoder__DOT__alu_src = 0U;
-    vlSelfRef.tb_decoder__DOT__reg_write = ((0x33U 
-                                             == (0x7fU 
-                                                 & vlSelfRef.tb_decoder__DOT__instruction)) 
-                                            || (0x13U 
-                                                == 
-                                                (0x7fU 
-                                                 & vlSelfRef.tb_decoder__DOT__instruction)));
     vlSelfRef.tb_decoder__DOT__alu_ctrl = 0U;
-    if ((0x33U == (0x7fU & vlSelfRef.tb_decoder__DOT__instruction))) {
-        vlSelfRef.tb_decoder__DOT__alu_src = 0U;
-        vlSelfRef.tb_decoder__DOT__alu_ctrl = ((0U 
-                                                == 
-                                                (7U 
-                                                 & (vlSelfRef.tb_decoder__DOT__instruction 
-                                                    >> 0xcU)))
-                                                ? (
-                                                   (0x20U 
-                                                    == 
-                                                    (vlSelfRef.tb_decoder__DOT__instruction 
-                                                     >> 0x19U))
-                                                    ? 1U
-                                                    : 0U)
-                                                : 0U);
-    } else if ((0x13U == (0x7fU & vlSelfRef.tb_decoder__DOT__instruction))) {
-        vlSelfRef.tb_decoder__DOT__alu_src = 1U;
-        vlSelfRef.tb_decoder__DOT__alu_ctrl = 0U;
+    vlSelfRef.tb_decoder__DOT__mem_to_reg = 0U;
+    vlSelfRef.tb_decoder__DOT__mem_write = 0U;
+    if ((0x40U & vlSelfRef.tb_decoder__DOT__instruction)) {
+        vlSelfRef.tb_decoder__DOT__mem_write = 0U;
+    } else if ((0x20U & vlSelfRef.tb_decoder__DOT__instruction)) {
+        if ((0x10U & vlSelfRef.tb_decoder__DOT__instruction)) {
+            if ((8U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                vlSelfRef.tb_decoder__DOT__mem_write = 0U;
+            } else if ((4U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                vlSelfRef.tb_decoder__DOT__mem_write = 0U;
+            } else if ((2U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                if ((1U & (~ vlSelfRef.tb_decoder__DOT__instruction))) {
+                    vlSelfRef.tb_decoder__DOT__mem_write = 0U;
+                }
+            } else {
+                vlSelfRef.tb_decoder__DOT__mem_write = 0U;
+            }
+        } else {
+            vlSelfRef.tb_decoder__DOT__mem_write = 
+                ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                           >> 3U))) && ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                                                  >> 2U))) 
+                                        && ((1U & (vlSelfRef.tb_decoder__DOT__instruction 
+                                                   >> 1U)) 
+                                            && (1U 
+                                                & vlSelfRef.tb_decoder__DOT__instruction))));
+        }
+    } else if ((0x10U & vlSelfRef.tb_decoder__DOT__instruction)) {
+        if ((8U & vlSelfRef.tb_decoder__DOT__instruction)) {
+            vlSelfRef.tb_decoder__DOT__mem_write = 0U;
+        } else if ((4U & vlSelfRef.tb_decoder__DOT__instruction)) {
+            vlSelfRef.tb_decoder__DOT__mem_write = 0U;
+        } else if ((2U & vlSelfRef.tb_decoder__DOT__instruction)) {
+            if ((1U & (~ vlSelfRef.tb_decoder__DOT__instruction))) {
+                vlSelfRef.tb_decoder__DOT__mem_write = 0U;
+            }
+        } else {
+            vlSelfRef.tb_decoder__DOT__mem_write = 0U;
+        }
+    } else if ((8U & vlSelfRef.tb_decoder__DOT__instruction)) {
+        vlSelfRef.tb_decoder__DOT__mem_write = 0U;
+    } else if ((4U & vlSelfRef.tb_decoder__DOT__instruction)) {
+        vlSelfRef.tb_decoder__DOT__mem_write = 0U;
+    } else if ((2U & vlSelfRef.tb_decoder__DOT__instruction)) {
+        if ((1U & (~ vlSelfRef.tb_decoder__DOT__instruction))) {
+            vlSelfRef.tb_decoder__DOT__mem_write = 0U;
+        }
+    } else {
+        vlSelfRef.tb_decoder__DOT__mem_write = 0U;
+    }
+    vlSelfRef.tb_decoder__DOT__reg_write = ((1U & (~ 
+                                                   (vlSelfRef.tb_decoder__DOT__instruction 
+                                                    >> 6U))) 
+                                            && ((0x20U 
+                                                 & vlSelfRef.tb_decoder__DOT__instruction)
+                                                 ? 
+                                                ((1U 
+                                                  & (vlSelfRef.tb_decoder__DOT__instruction 
+                                                     >> 4U)) 
+                                                 && ((1U 
+                                                      & (~ 
+                                                         (vlSelfRef.tb_decoder__DOT__instruction 
+                                                          >> 3U))) 
+                                                     && ((1U 
+                                                          & (~ 
+                                                             (vlSelfRef.tb_decoder__DOT__instruction 
+                                                              >> 2U))) 
+                                                         && ((1U 
+                                                              & (vlSelfRef.tb_decoder__DOT__instruction 
+                                                                 >> 1U)) 
+                                                             && (1U 
+                                                                 & vlSelfRef.tb_decoder__DOT__instruction)))))
+                                                 : 
+                                                ((0x10U 
+                                                  & vlSelfRef.tb_decoder__DOT__instruction)
+                                                  ? 
+                                                 ((1U 
+                                                   & (~ 
+                                                      (vlSelfRef.tb_decoder__DOT__instruction 
+                                                       >> 3U))) 
+                                                  && ((1U 
+                                                       & (~ 
+                                                          (vlSelfRef.tb_decoder__DOT__instruction 
+                                                           >> 2U))) 
+                                                      && ((1U 
+                                                           & (vlSelfRef.tb_decoder__DOT__instruction 
+                                                              >> 1U)) 
+                                                          && (1U 
+                                                              & vlSelfRef.tb_decoder__DOT__instruction))))
+                                                  : 
+                                                 ((1U 
+                                                   & (~ 
+                                                      (vlSelfRef.tb_decoder__DOT__instruction 
+                                                       >> 3U))) 
+                                                  && ((1U 
+                                                       & (~ 
+                                                          (vlSelfRef.tb_decoder__DOT__instruction 
+                                                           >> 2U))) 
+                                                      && ((1U 
+                                                           & (vlSelfRef.tb_decoder__DOT__instruction 
+                                                              >> 1U)) 
+                                                          && (1U 
+                                                              & vlSelfRef.tb_decoder__DOT__instruction)))))));
+    vlSelfRef.tb_decoder__DOT__alu_src = 0U;
+    vlSelfRef.tb_decoder__DOT__immediate = 0U;
+    if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                  >> 6U)))) {
+        if ((0x20U & vlSelfRef.tb_decoder__DOT__instruction)) {
+            if ((0x10U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                              >> 3U)))) {
+                    if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                                  >> 2U)))) {
+                        if ((2U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                            if ((1U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                                vlSelfRef.tb_decoder__DOT__alu_ctrl 
+                                    = ((0U == (7U & 
+                                               (vlSelfRef.tb_decoder__DOT__instruction 
+                                                >> 0xcU)))
+                                        ? ((0x20U == 
+                                            (vlSelfRef.tb_decoder__DOT__instruction 
+                                             >> 0x19U))
+                                            ? 1U : 0U)
+                                        : 0U);
+                                vlSelfRef.tb_decoder__DOT__alu_src = 0U;
+                            }
+                        }
+                    }
+                }
+            } else if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                                 >> 3U)))) {
+                if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                              >> 2U)))) {
+                    if ((2U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                        if ((1U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                            vlSelfRef.tb_decoder__DOT__alu_ctrl = 0U;
+                            vlSelfRef.tb_decoder__DOT__alu_src = 1U;
+                        }
+                    }
+                }
+            }
+            if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                          >> 4U)))) {
+                if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                              >> 3U)))) {
+                    if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                                  >> 2U)))) {
+                        if ((2U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                            if ((1U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                                vlSelfRef.tb_decoder__DOT__immediate 
+                                    = (((- (IData)(
+                                                   (vlSelfRef.tb_decoder__DOT__instruction 
+                                                    >> 0x1fU))) 
+                                        << 0xcU) | 
+                                       ((0xfe0U & (vlSelfRef.tb_decoder__DOT__instruction 
+                                                   >> 0x14U)) 
+                                        | (0x1fU & 
+                                           (vlSelfRef.tb_decoder__DOT__instruction 
+                                            >> 7U))));
+                            }
+                        }
+                    }
+                }
+            }
+        } else if ((0x10U & vlSelfRef.tb_decoder__DOT__instruction)) {
+            if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                          >> 3U)))) {
+                if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                              >> 2U)))) {
+                    if ((2U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                        if ((1U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                            vlSelfRef.tb_decoder__DOT__alu_ctrl = 0U;
+                            vlSelfRef.tb_decoder__DOT__alu_src = 1U;
+                            vlSelfRef.tb_decoder__DOT__immediate 
+                                = (((- (IData)((vlSelfRef.tb_decoder__DOT__instruction 
+                                                >> 0x1fU))) 
+                                    << 0xcU) | (vlSelfRef.tb_decoder__DOT__instruction 
+                                                >> 0x14U));
+                        }
+                    }
+                }
+            }
+        } else if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                             >> 3U)))) {
+            if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                          >> 2U)))) {
+                if ((2U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                    if ((1U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                        vlSelfRef.tb_decoder__DOT__alu_ctrl = 0U;
+                        vlSelfRef.tb_decoder__DOT__alu_src = 1U;
+                        vlSelfRef.tb_decoder__DOT__immediate 
+                            = (((- (IData)((vlSelfRef.tb_decoder__DOT__instruction 
+                                            >> 0x1fU))) 
+                                << 0xcU) | (vlSelfRef.tb_decoder__DOT__instruction 
+                                            >> 0x14U));
+                    }
+                }
+            }
+        }
+        if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                      >> 5U)))) {
+            if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                          >> 4U)))) {
+                if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                              >> 3U)))) {
+                    if ((1U & (~ (vlSelfRef.tb_decoder__DOT__instruction 
+                                  >> 2U)))) {
+                        if ((2U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                            if ((1U & vlSelfRef.tb_decoder__DOT__instruction)) {
+                                vlSelfRef.tb_decoder__DOT__mem_to_reg = 1U;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     vlSelfRef.tb_decoder__DOT__rs1_addr = (0x1fU & 
                                            (vlSelfRef.tb_decoder__DOT__instruction 

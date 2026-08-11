@@ -6,21 +6,24 @@ module instruction_memory (
     logic [31:0] memory [0:255];
 
     initial begin
-        // addi x5, x0, 10
-        memory[0] = 32'h00A00293;
 
-        // addi x6, x0, 20
-        memory[1] = 32'h01400313;
+        // addi x5, x0, 42
+        memory[0] = 32'h02A00293;
 
-        // add x7, x5, x6
-        memory[2] = 32'h006283B3;
+        // sw x5, 0(x0)
+        memory[1] = 32'h00502023;
 
-        // NOP = addi x0, x0, 0
-        memory[3] = 32'h00000013;
+        // lw x6, 0(x0)
+        memory[2] = 32'h00002303;
+
+        // addi x7, x6, 8
+        memory[3] = 32'h00830393;
+
+        // NOP
+        memory[4] = 32'h00000013;
+
     end
 
-    // Address is byte-addressed.
-    // Divide by 4 to index 32-bit instructions.
     assign instruction = memory[address[9:2]];
 
 endmodule
