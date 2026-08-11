@@ -17,7 +17,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_riscv_cpu___024root final : public Verila
     // DESIGN SPECIFIC STATE
     CData/*0:0*/ tb_riscv_cpu__DOT__clk;
     CData/*0:0*/ tb_riscv_cpu__DOT__reset;
-    CData/*0:0*/ tb_riscv_cpu__DOT__dut__DOT__branch;
+    CData/*1:0*/ tb_riscv_cpu__DOT__dut__DOT__branch_type;
     CData/*4:0*/ tb_riscv_cpu__DOT__dut__DOT__core__DOT__rd_addr;
     CData/*0:0*/ tb_riscv_cpu__DOT__dut__DOT__core__DOT__reg_write;
     CData/*0:0*/ tb_riscv_cpu__DOT__dut__DOT__core__DOT__mem_write;

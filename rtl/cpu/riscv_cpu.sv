@@ -7,15 +7,31 @@ module riscv_cpu (
     output logic [31:0] alu_result
 );
 
-    logic branch;
-    logic zero;
+    logic [1:0] branch_type;
+    logic       zero;
 
     logic [31:0] immediate;
 
-    logic branch_taken;
+    logic        branch_taken;
     logic [31:0] branch_target;
 
-    assign branch_taken  = branch && zero;
+    always_comb begin
+
+        case (branch_type)
+
+            2'b01:
+                branch_taken = zero;       // BEQ
+
+            2'b10:
+                branch_taken = !zero;      // BNE
+
+            default:
+                branch_taken = 1'b0;
+
+        endcase
+
+    end
+
     assign branch_target = pc + immediate;
 
     pc pc_unit (
@@ -39,7 +55,7 @@ module riscv_cpu (
 
         .alu_result(alu_result),
 
-        .branch(branch),
+        .branch_type(branch_type),
         .zero(zero),
         .immediate(immediate)
     );

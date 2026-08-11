@@ -3,7 +3,7 @@ module cpu_core (
     input  logic [31:0] instruction,
 
     output logic [31:0] alu_result,
-    output logic        branch,
+    output logic [1:0]  branch_type,
     output logic        zero,
     output logic [31:0] immediate
 );
@@ -14,7 +14,6 @@ module cpu_core (
 
     logic alu_src;
     logic reg_write;
-
     logic mem_write;
     logic mem_to_reg;
 
@@ -35,11 +34,10 @@ module cpu_core (
 
         .alu_src(alu_src),
         .reg_write(reg_write),
-
         .mem_write(mem_write),
         .mem_to_reg(mem_to_reg),
 
-        .branch(branch),
+        .branch_type(branch_type),
 
         .alu_ctrl(alu_ctrl)
     );
@@ -48,7 +46,6 @@ module cpu_core (
         .clk(clk),
 
         .we(reg_write),
-
         .mem_write(mem_write),
         .mem_to_reg(mem_to_reg),
 
@@ -57,7 +54,6 @@ module cpu_core (
         .rd_addr(rd_addr),
 
         .immediate(immediate),
-
         .alu_src(alu_src),
         .alu_ctrl(alu_ctrl),
 

@@ -7,25 +7,25 @@ module instruction_memory (
 
     initial begin
 
-        // addi x5, x0, 5
-        memory[0] = 32'h00500293;
+        // addi x5, x0, 0
+        memory[0] = 32'h00000293;
 
         // addi x6, x0, 5
         memory[1] = 32'h00500313;
 
-        // beq x5, x6, +8
-        // PC 8 -> PC 16
-        memory[2] = 32'h00628463;
+        // loop:
+        // addi x5, x5, 1
+        memory[2] = 32'h00128293;
 
-        // should be skipped
-        // addi x7, x0, 1
-        memory[3] = 32'h00100393;
+        // bne x5, x6, -4
+        // PC 12 -> PC 8
+        memory[3] = 32'hFE629EE3;
 
-        // branch target
+        // after loop:
         // addi x7, x0, 99
         memory[4] = 32'h06300393;
 
-        // nop
+        // NOP
         memory[5] = 32'h00000013;
 
     end
