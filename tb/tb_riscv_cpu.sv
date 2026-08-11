@@ -10,23 +10,20 @@ module tb_riscv_cpu;
     riscv_cpu dut (
         .clk(clk),
         .reset(reset),
-
         .pc(pc),
         .instruction(instruction),
         .alu_result(alu_result)
     );
-
 
     initial begin
         clk = 0;
         forever #5 clk = ~clk;
     end
 
-
     initial begin
 
         $display("==============================");
-        $display("      LOAD / STORE TEST");
+        $display("          BEQ TEST");
         $display("==============================");
 
         reset = 1;
@@ -36,85 +33,66 @@ module tb_riscv_cpu;
 
         reset = 0;
 
-
-        // --------------------------------
-        // addi x5, x0, 42
-        // --------------------------------
-
+        // addi x5, x0, 5
         @(posedge clk);
         #1;
 
         $display(
-            "x5 = %0d",
+            "PC=%0d x5=%0d",
+            pc,
             dut.core.dp.rf.registers[5]
         );
 
-
-        // --------------------------------
-        // sw x5, 0(x0)
-        // --------------------------------
-
+        // addi x6, x0, 5
         @(posedge clk);
         #1;
 
         $display(
-            "RAM[0] = %0d",
-            dut.core.dp.dmem.memory[0]
-        );
-
-
-        // --------------------------------
-        // lw x6, 0(x0)
-        // --------------------------------
-
-        @(posedge clk);
-        #1;
-
-        $display(
-            "x6 = %0d",
+            "PC=%0d x6=%0d",
+            pc,
             dut.core.dp.rf.registers[6]
         );
 
-
-        // --------------------------------
-        // addi x7, x6, 8
-        // --------------------------------
-
+        // BEQ should branch from PC=8 to PC=16
         @(posedge clk);
         #1;
 
         $display(
-            "x7 = %0d",
+            "After BEQ: PC=%0d",
+            pc
+        );
+
+        if (pc !== 32'd16)
+            $fatal("FAIL: expected PC=16");
+
+        $display("PASS: BEQ jumped to PC=16");
+
+        // Execute addi x7, x0, 99
+        @(posedge clk);
+        #1;
+
+        $display(
+            "x7=%0d",
             dut.core.dp.rf.registers[7]
         );
 
-
-        // ========================================
-        // VERIFY EVERYTHING
-        // ========================================
-
-        if (dut.core.dp.rf.registers[5] !== 32'd42)
+        if (dut.core.dp.rf.registers[5] !== 32'd5)
             $fatal("FAIL: x5");
 
-        if (dut.core.dp.dmem.memory[0] !== 32'd42)
-            $fatal("FAIL: RAM[0]");
-
-        if (dut.core.dp.rf.registers[6] !== 32'd42)
+        if (dut.core.dp.rf.registers[6] !== 32'd5)
             $fatal("FAIL: x6");
 
-        if (dut.core.dp.rf.registers[7] !== 32'd50)
+        if (dut.core.dp.rf.registers[7] !== 32'd99)
             $fatal("FAIL: x7");
 
-
         $display("");
-        $display("PASS:");
-        $display("x5     = 42");
-        $display("RAM[0] = 42");
-        $display("x6     = 42");
-        $display("x7     = 50");
+        $display("PASS: x5 = 5");
+        $display("PASS: x6 = 5");
+        $display("PASS: PC=12 was skipped");
+        $display("PASS: x7 = 99");
 
         $display("==============================");
-        $display("     LOAD / STORE PASS");
+        $display("        BEQ TEST PASS");
         $display("==============================");
 
         $finish;

@@ -17,6 +17,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_riscv_cpu___024root final : public Verila
     // DESIGN SPECIFIC STATE
     CData/*0:0*/ tb_riscv_cpu__DOT__clk;
     CData/*0:0*/ tb_riscv_cpu__DOT__reset;
+    CData/*0:0*/ tb_riscv_cpu__DOT__dut__DOT__branch;
     CData/*4:0*/ tb_riscv_cpu__DOT__dut__DOT__core__DOT__rd_addr;
     CData/*0:0*/ tb_riscv_cpu__DOT__dut__DOT__core__DOT__reg_write;
     CData/*0:0*/ tb_riscv_cpu__DOT__dut__DOT__core__DOT__mem_write;
@@ -26,6 +27,7 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_riscv_cpu___024root final : public Verila
     CData/*0:0*/ __VactContinue;
     IData/*31:0*/ tb_riscv_cpu__DOT__pc;
     IData/*31:0*/ tb_riscv_cpu__DOT__alu_result;
+    IData/*31:0*/ tb_riscv_cpu__DOT__dut__DOT__branch_target;
     IData/*31:0*/ tb_riscv_cpu__DOT__dut__DOT__core__DOT__rs2_data;
     IData/*31:0*/ __VactIterCount;
     VlUnpacked<IData/*31:0*/, 256> tb_riscv_cpu__DOT__dut__DOT__imem__DOT__memory;

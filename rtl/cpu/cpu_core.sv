@@ -2,14 +2,15 @@ module cpu_core (
     input  logic        clk,
     input  logic [31:0] instruction,
 
-    output logic [31:0] alu_result
+    output logic [31:0] alu_result,
+    output logic        branch,
+    output logic        zero,
+    output logic [31:0] immediate
 );
 
     logic [4:0] rs1_addr;
     logic [4:0] rs2_addr;
     logic [4:0] rd_addr;
-
-    logic [31:0] immediate;
 
     logic alu_src;
     logic reg_write;
@@ -21,13 +22,7 @@ module cpu_core (
 
     logic [31:0] rs1_data;
     logic [31:0] rs2_data;
-
     logic [31:0] mem_read_data;
-
-
-    // ========================================
-    // DECODER
-    // ========================================
 
     decoder dec (
         .instruction(instruction),
@@ -44,13 +39,10 @@ module cpu_core (
         .mem_write(mem_write),
         .mem_to_reg(mem_to_reg),
 
+        .branch(branch),
+
         .alu_ctrl(alu_ctrl)
     );
-
-
-    // ========================================
-    // DATAPATH
-    // ========================================
 
     datapath dp (
         .clk(clk),
@@ -73,8 +65,9 @@ module cpu_core (
         .rs2_data(rs2_data),
 
         .alu_result(alu_result),
+        .mem_read_data(mem_read_data),
 
-        .mem_read_data(mem_read_data)
+        .zero(zero)
     );
 
 endmodule
