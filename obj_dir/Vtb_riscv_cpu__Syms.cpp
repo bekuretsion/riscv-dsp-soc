@@ -18,7 +18,7 @@ Vtb_riscv_cpu__Syms::Vtb_riscv_cpu__Syms(VerilatedContext* contextp, const char*
     , TOP{this, namep}
 {
         // Check resources
-        Verilated::stackCheck(138);
+        Verilated::stackCheck(158);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-12);
     _vm_contextp__->timeprecision(-12);

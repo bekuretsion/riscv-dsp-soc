@@ -17,13 +17,17 @@ VL_ATTR_COLD void Vtb_riscv_cpu___024root___eval_initial__TOP(Vtb_riscv_cpu___02
     Vtb_riscv_cpu__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vtb_riscv_cpu___024root___eval_initial__TOP\n"); );
     auto& vlSelfRef = std::ref(*vlSelf).get();
+    // Init
+    VlWide<5>/*159:0*/ __Vtemp_1;
     // Body
-    vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__imem__DOT__memory[0U] = 0x293U;
-    vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__imem__DOT__memory[1U] = 0x500313U;
-    vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__imem__DOT__memory[2U] = 0x128293U;
-    vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__imem__DOT__memory[3U] = 0xfe629ee3U;
-    vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__imem__DOT__memory[4U] = 0x6300393U;
-    vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__imem__DOT__memory[5U] = 0x13U;
+    __Vtemp_1[0U] = 0x2e686578U;
+    __Vtemp_1[1U] = 0x6c6f6f70U;
+    __Vtemp_1[2U] = 0x616d732fU;
+    __Vtemp_1[3U] = 0x726f6772U;
+    __Vtemp_1[4U] = 0x70U;
+    VL_READMEM_N(true, 32, 256, 0, VL_CVT_PACK_STR_NW(5, __Vtemp_1)
+                 ,  &(vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__imem__DOT__memory)
+                 , 0, ~0ULL);
 }
 
 VL_ATTR_COLD void Vtb_riscv_cpu___024root___eval_final(Vtb_riscv_cpu___024root* vlSelf) {
