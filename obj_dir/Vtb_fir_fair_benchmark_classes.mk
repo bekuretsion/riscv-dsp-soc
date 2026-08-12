@@ -2,7 +2,7 @@
 # DESCRIPTION: Verilator output: Make include file with class lists
 #
 # This file lists generated Verilated files, for including in higher level makefiles.
-# See Vtb_fir_benchmark.mk for the caller.
+# See Vtb_fir_fair_benchmark.mk for the caller.
 
 ### Switches...
 # C11 constructs required?  0/1 (always on now)
@@ -23,23 +23,23 @@ VM_TRACE_FST = 0
 ### Object file lists...
 # Generated module classes, fast-path, compile with highest optimization
 VM_CLASSES_FAST += \
-	Vtb_fir_benchmark \
-	Vtb_fir_benchmark___024root__DepSet_h0684ccfa__0 \
-	Vtb_fir_benchmark___024root__DepSet_h89c7a344__0 \
-	Vtb_fir_benchmark__main \
+	Vtb_fir_fair_benchmark \
+	Vtb_fir_fair_benchmark___024root__DepSet_h3172112d__0 \
+	Vtb_fir_fair_benchmark___024root__DepSet_hf65fdaaa__0 \
+	Vtb_fir_fair_benchmark__main \
 
 # Generated module classes, non-fast-path, compile with low/medium optimization
 VM_CLASSES_SLOW += \
-	Vtb_fir_benchmark___024root__Slow \
-	Vtb_fir_benchmark___024root__DepSet_h0684ccfa__0__Slow \
-	Vtb_fir_benchmark___024root__DepSet_h89c7a344__0__Slow \
+	Vtb_fir_fair_benchmark___024root__Slow \
+	Vtb_fir_fair_benchmark___024root__DepSet_h3172112d__0__Slow \
+	Vtb_fir_fair_benchmark___024root__DepSet_hf65fdaaa__0__Slow \
 
 # Generated support classes, fast-path, compile with highest optimization
 VM_SUPPORT_FAST += \
 
 # Generated support classes, non-fast-path, compile with low/medium optimization
 VM_SUPPORT_SLOW += \
-	Vtb_fir_benchmark__Syms \
+	Vtb_fir_fair_benchmark__Syms \
 
 # Global classes, need linked once per executable, fast-path, compile with highest optimization
 VM_GLOBAL_FAST += \

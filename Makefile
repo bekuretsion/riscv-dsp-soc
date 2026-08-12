@@ -25,6 +25,7 @@ RTL = \
 	all \
 	soc-test \
 	benchmark \
+	fair-benchmark \
 	fir \
 	mmio \
 	clean
@@ -32,6 +33,10 @@ RTL = \
 
 all: soc-test
 
+
+# ============================================================
+# CPU -> FIR SOC REGRESSION
+# ============================================================
 
 soc-test:
 > $(RISCV_GCC) \
@@ -68,6 +73,10 @@ soc-test:
 > ./obj_dir/Vtb_riscv_cpu
 
 
+# ============================================================
+# ORIGINAL FIR BENCHMARK
+# ============================================================
+
 benchmark:
 > $(RISCV_GCC) \
 	-march=rv32i \
@@ -103,6 +112,51 @@ benchmark:
 > ./obj_dir/Vtb_fir_benchmark
 
 
+# ============================================================
+# FAIR MULTI-SAMPLE FIR BENCHMARK
+# ============================================================
+
+fair-benchmark:
+> $(RISCV_GCC) \
+	-march=rv32i \
+	-mabi=ilp32 \
+	-nostdlib \
+	-nostartfiles \
+	-Ttext=0x0 \
+	software/fir_fair_benchmark.S \
+	-o software/fir_fair_benchmark.elf
+
+> $(RISCV_OBJCOPY) \
+	-O binary \
+	software/fir_fair_benchmark.elf \
+	software/fir_fair_benchmark.bin
+
+> python3 scripts/bin2hex.py \
+	software/fir_fair_benchmark.bin \
+	programs/fir_fair_benchmark.hex
+
+> cp \
+	programs/fir_fair_benchmark.hex \
+	programs/program.hex
+
+> rm -rf obj_dir
+
+> $(VERILATOR) \
+	--binary \
+	--timing \
+	-Wall \
+	-Wno-fatal \
+	$(RTL) \
+	tb/tb_fir_fair_benchmark.sv \
+	--top-module tb_fir_fair_benchmark
+
+> ./obj_dir/Vtb_fir_fair_benchmark
+
+
+# ============================================================
+# FIR ACCELERATOR UNIT TEST
+# ============================================================
+
 fir:
 > rm -rf obj_dir
 
@@ -117,6 +171,10 @@ fir:
 
 > ./obj_dir/Vtb_fir_accelerator
 
+
+# ============================================================
+# MMIO INTERCONNECT TEST
+# ============================================================
 
 mmio:
 > rm -rf obj_dir
@@ -135,10 +193,12 @@ mmio:
 > ./obj_dir/Vtb_mmio_interconnect
 
 
+# ============================================================
+# CLEAN
+# ============================================================
+
 clean:
 > rm -rf obj_dir
-
 > rm -f software/*.elf
 > rm -f software/*.bin
-
 > rm -f programs/program.hex
