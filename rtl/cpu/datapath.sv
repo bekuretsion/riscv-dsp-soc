@@ -1,5 +1,7 @@
 module datapath (
     input  logic        clk,
+    input  logic        reset,
+
     input  logic        we,
 
     input  logic        mem_write,
@@ -13,6 +15,7 @@ module datapath (
     input  logic [4:0]  rd_addr,
 
     input  logic [31:0] immediate,
+
     input  logic        alu_src,
     input  logic [3:0]  alu_ctrl,
 
@@ -22,7 +25,10 @@ module datapath (
     output logic [31:0] alu_result,
     output logic [31:0] mem_read_data,
 
-    output logic        zero
+    output logic        zero,
+
+    output logic        fir_selected,
+    output logic        fir_done
 );
 
     logic [31:0] alu_b;
@@ -39,8 +45,8 @@ module datapath (
 
         .rs1_addr(rs1_addr),
         .rs2_addr(rs2_addr),
-        .rd_addr(rd_addr),
 
+        .rd_addr(rd_addr),
         .rd_data(writeback_data),
 
         .rs1_data(rs1_data),
@@ -72,28 +78,41 @@ module datapath (
 
 
     // ========================================
-    // DATA MEMORY
+    // MEMORY-MAPPED INTERCONNECT
     // ========================================
 
-    data_memory dmem (
+    mmio_interconnect mmio (
         .clk(clk),
+        .reset(reset),
 
         .mem_write(mem_write),
 
-        .address(alu_result),
+        // A load instruction requests a read
+        .mem_read(mem_to_reg),
 
+        .address(alu_result),
         .write_data(rs2_data),
 
-        .read_data(mem_read_data)
+        .read_data(mem_read_data),
+
+        .fir_selected(fir_selected),
+        .fir_done(fir_done)
     );
 
 
     // ========================================
-    // WRITEBACK MUX
+    // REGISTER WRITEBACK
+    // ========================================
     //
-    // JAL     -> PC + 4
-    // LW      -> memory
-    // others  -> ALU result
+    // JAL:
+    //     rd <- PC + 4
+    //
+    // LW:
+    //     rd <- memory/MMIO
+    //
+    // Other arithmetic:
+    //     rd <- ALU
+    //
     // ========================================
 
     always_comb begin

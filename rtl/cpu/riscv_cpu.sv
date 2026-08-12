@@ -3,8 +3,13 @@ module riscv_cpu (
     input  logic        reset,
 
     output logic [31:0] pc,
+
     output logic [31:0] instruction,
-    output logic [31:0] alu_result
+
+    output logic [31:0] alu_result,
+
+    output logic        fir_selected,
+    output logic        fir_done
 );
 
     logic [1:0] branch_type;
@@ -23,14 +28,17 @@ module riscv_cpu (
 
 
     // ========================================
-    // NEXT-PC CALCULATIONS
+    // PC CALCULATIONS
     // ========================================
 
-    assign pc_plus_4 = pc + 32'd4;
+    assign pc_plus_4 =
+        pc + 32'd4;
 
-    assign branch_target = pc + immediate;
+    assign branch_target =
+        pc + immediate;
 
-    assign jump_target = pc + immediate;
+    assign jump_target =
+        pc + immediate;
 
 
     // ========================================
@@ -41,11 +49,13 @@ module riscv_cpu (
 
         case (branch_type)
 
+            // BEQ
             2'b01:
-                branch_taken = zero;       // BEQ
+                branch_taken = zero;
 
+            // BNE
             2'b10:
-                branch_taken = !zero;      // BNE
+                branch_taken = !zero;
 
             default:
                 branch_taken = 1'b0;
@@ -89,6 +99,7 @@ module riscv_cpu (
 
     cpu_core core (
         .clk(clk),
+        .reset(reset),
 
         .instruction(instruction),
 
@@ -102,7 +113,10 @@ module riscv_cpu (
 
         .zero(zero),
 
-        .immediate(immediate)
+        .immediate(immediate),
+
+        .fir_selected(fir_selected),
+        .fir_done(fir_done)
     );
 
 endmodule

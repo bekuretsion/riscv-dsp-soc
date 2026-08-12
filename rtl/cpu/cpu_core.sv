@@ -1,5 +1,7 @@
 module cpu_core (
     input  logic        clk,
+    input  logic        reset,
+
     input  logic [31:0] instruction,
     input  logic [31:0] pc_plus_4,
 
@@ -9,7 +11,11 @@ module cpu_core (
     output logic        jump,
 
     output logic        zero,
-    output logic [31:0] immediate
+
+    output logic [31:0] immediate,
+
+    output logic        fir_selected,
+    output logic        fir_done
 );
 
     logic [4:0] rs1_addr;
@@ -44,12 +50,14 @@ module cpu_core (
         .immediate(immediate),
 
         .alu_src(alu_src),
+
         .reg_write(reg_write),
 
         .mem_write(mem_write),
         .mem_to_reg(mem_to_reg),
 
         .branch_type(branch_type),
+
         .jump(jump),
 
         .alu_ctrl(alu_ctrl)
@@ -62,6 +70,7 @@ module cpu_core (
 
     datapath dp (
         .clk(clk),
+        .reset(reset),
 
         .we(reg_write),
 
@@ -87,7 +96,10 @@ module cpu_core (
 
         .mem_read_data(mem_read_data),
 
-        .zero(zero)
+        .zero(zero),
+
+        .fir_selected(fir_selected),
+        .fir_done(fir_done)
     );
 
 endmodule

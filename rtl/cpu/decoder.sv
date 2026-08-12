@@ -14,6 +14,7 @@ module decoder (
 
     output logic [1:0]  branch_type,
     output logic        jump,
+    output logic        lui,
 
     output logic [3:0]  alu_ctrl
 );
@@ -38,17 +39,14 @@ module decoder (
         mem_to_reg  = 1'b0;
         branch_type = 2'b00;
         jump        = 1'b0;
+        lui         = 1'b0;
         alu_ctrl    = 4'b0000;
 
         case (opcode)
 
-            // ========================================
-            // R-TYPE
-            // ========================================
+            // R-Type
             7'b0110011: begin
-
                 reg_write = 1'b1;
-                alu_src   = 1'b0;
 
                 case (funct3)
 
@@ -88,14 +86,10 @@ module decoder (
                         alu_ctrl = 4'b0000;
 
                 endcase
-
             end
 
 
-            // ========================================
-            // I-TYPE ARITHMETIC
             // ADDI
-            // ========================================
             7'b0010011: begin
 
                 reg_write = 1'b1;
@@ -107,13 +101,10 @@ module decoder (
                 };
 
                 alu_ctrl = 4'b0000;
-
             end
 
 
-            // ========================================
             // LW
-            // ========================================
             7'b0000011: begin
 
                 reg_write  = 1'b1;
@@ -126,16 +117,12 @@ module decoder (
                 };
 
                 alu_ctrl = 4'b0000;
-
             end
 
 
-            // ========================================
             // SW
-            // ========================================
             7'b0100011: begin
 
-                reg_write = 1'b0;
                 alu_src   = 1'b1;
                 mem_write = 1'b1;
 
@@ -146,19 +133,12 @@ module decoder (
                 };
 
                 alu_ctrl = 4'b0000;
-
             end
 
 
-            // ========================================
             // BEQ / BNE
-            // ========================================
             7'b1100011: begin
 
-                reg_write = 1'b0;
-                alu_src   = 1'b0;
-
-                // Compare rs1 - rs2
                 alu_ctrl = 4'b0001;
 
                 immediate = {
@@ -182,13 +162,10 @@ module decoder (
                         branch_type = 2'b00;
 
                 endcase
-
             end
 
 
-            // ========================================
             // JAL
-            // ========================================
             7'b1101111: begin
 
                 reg_write = 1'b1;
@@ -202,15 +179,24 @@ module decoder (
                     instruction[30:21],
                     1'b0
                 };
+            end
+
+
+            // LUI
+            7'b0110111: begin
+
+                reg_write = 1'b1;
+                lui       = 1'b1;
+
+                immediate = {
+                    instruction[31:12],
+                    12'b0
+                };
 
             end
 
 
-            // ========================================
-            // UNSUPPORTED
-            // ========================================
             default: begin
-
                 immediate   = 32'd0;
                 alu_src     = 1'b0;
                 reg_write   = 1'b0;
@@ -218,12 +204,11 @@ module decoder (
                 mem_to_reg  = 1'b0;
                 branch_type = 2'b00;
                 jump        = 1'b0;
+                lui         = 1'b0;
                 alu_ctrl    = 4'b0000;
-
             end
 
         endcase
-
     end
 
 endmodule
