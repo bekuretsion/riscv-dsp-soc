@@ -1,16 +1,16 @@
 // Verilated -*- C++ -*-
 // DESCRIPTION: Verilator output: Symbol table implementation internals
 
-#include "Vtb_riscv_cpu__pch.h"
-#include "Vtb_riscv_cpu.h"
-#include "Vtb_riscv_cpu___024root.h"
+#include "Vtb_fir_benchmark__pch.h"
+#include "Vtb_fir_benchmark.h"
+#include "Vtb_fir_benchmark___024root.h"
 
 // FUNCTIONS
-Vtb_riscv_cpu__Syms::~Vtb_riscv_cpu__Syms()
+Vtb_fir_benchmark__Syms::~Vtb_fir_benchmark__Syms()
 {
 }
 
-Vtb_riscv_cpu__Syms::Vtb_riscv_cpu__Syms(VerilatedContext* contextp, const char* namep, Vtb_riscv_cpu* modelp)
+Vtb_fir_benchmark__Syms::Vtb_fir_benchmark__Syms(VerilatedContext* contextp, const char* namep, Vtb_fir_benchmark* modelp)
     : VerilatedSyms{contextp}
     // Setup internal state of the Syms class
     , __Vm_modelp{modelp}
@@ -18,7 +18,7 @@ Vtb_riscv_cpu__Syms::Vtb_riscv_cpu__Syms(VerilatedContext* contextp, const char*
     , TOP{this, namep}
 {
         // Check resources
-        Verilated::stackCheck(258);
+        Verilated::stackCheck(289);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-12);
     _vm_contextp__->timeprecision(-12);
@@ -26,5 +26,5 @@ Vtb_riscv_cpu__Syms::Vtb_riscv_cpu__Syms(VerilatedContext* contextp, const char*
     // Setup each module's pointer back to symbol table (for public functions)
     TOP.__Vconfigure(true);
     // Setup scopes
-    __Vscope_tb_riscv_cpu.configure(this, name(), "tb_riscv_cpu", "tb_riscv_cpu", "<null>", -12, VerilatedScope::SCOPE_OTHER);
+    __Vscope_tb_fir_benchmark.configure(this, name(), "tb_fir_benchmark", "tb_fir_benchmark", "<null>", -12, VerilatedScope::SCOPE_OTHER);
 }

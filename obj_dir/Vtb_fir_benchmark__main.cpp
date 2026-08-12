@@ -2,7 +2,7 @@
 // DESCRIPTION: main() calling loop, created with Verilator --main
 
 #include "verilated.h"
-#include "Vtb_riscv_cpu.h"
+#include "Vtb_fir_benchmark.h"
 
 //======================
 
@@ -13,7 +13,7 @@ int main(int argc, char** argv, char**) {
     contextp->commandArgs(argc, argv);
 
     // Construct the Verilated model, from Vtop.h generated from Verilating
-    const std::unique_ptr<Vtb_riscv_cpu> topp{new Vtb_riscv_cpu{contextp.get(), ""}};
+    const std::unique_ptr<Vtb_fir_benchmark> topp{new Vtb_fir_benchmark{contextp.get(), ""}};
 
     // Simulate until $finish
     while (!contextp->gotFinish()) {

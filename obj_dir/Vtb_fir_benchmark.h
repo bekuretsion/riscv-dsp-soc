@@ -5,19 +5,19 @@
 // The class here is then constructed to instantiate the design.
 // See the Verilator manual for examples.
 
-#ifndef VERILATED_VTB_RISCV_CPU_H_
-#define VERILATED_VTB_RISCV_CPU_H_  // guard
+#ifndef VERILATED_VTB_FIR_BENCHMARK_H_
+#define VERILATED_VTB_FIR_BENCHMARK_H_  // guard
 
 #include "verilated.h"
 
-class Vtb_riscv_cpu__Syms;
-class Vtb_riscv_cpu___024root;
+class Vtb_fir_benchmark__Syms;
+class Vtb_fir_benchmark___024root;
 
 // This class is the main interface to the Verilated model
-class alignas(VL_CACHE_LINE_BYTES) Vtb_riscv_cpu VL_NOT_FINAL : public VerilatedModel {
+class alignas(VL_CACHE_LINE_BYTES) Vtb_fir_benchmark VL_NOT_FINAL : public VerilatedModel {
   private:
     // Symbol table holding complete model state (owned by this class)
-    Vtb_riscv_cpu__Syms* const vlSymsp;
+    Vtb_fir_benchmark__Syms* const vlSymsp;
 
   public:
 
@@ -35,19 +35,19 @@ class alignas(VL_CACHE_LINE_BYTES) Vtb_riscv_cpu VL_NOT_FINAL : public Verilated
 
     // Root instance pointer to allow access to model internals,
     // including inlined /* verilator public_flat_* */ items.
-    Vtb_riscv_cpu___024root* const rootp;
+    Vtb_fir_benchmark___024root* const rootp;
 
     // CONSTRUCTORS
     /// Construct the model; called by application code
     /// If contextp is null, then the model will use the default global context
     /// If name is "", then makes a wrapper with a
     /// single model invisible with respect to DPI scope names.
-    explicit Vtb_riscv_cpu(VerilatedContext* contextp, const char* name = "TOP");
-    explicit Vtb_riscv_cpu(const char* name = "TOP");
+    explicit Vtb_fir_benchmark(VerilatedContext* contextp, const char* name = "TOP");
+    explicit Vtb_fir_benchmark(const char* name = "TOP");
     /// Destroy the model; called (often implicitly) by application code
-    virtual ~Vtb_riscv_cpu();
+    virtual ~Vtb_fir_benchmark();
   private:
-    VL_UNCOPYABLE(Vtb_riscv_cpu);  ///< Copying not allowed
+    VL_UNCOPYABLE(Vtb_fir_benchmark);  ///< Copying not allowed
 
   public:
     // API METHODS

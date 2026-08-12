@@ -7,6 +7,17 @@ RISCV_OBJCOPY = riscv64-unknown-elf-objcopy
 RISCV_OBJDUMP = riscv64-unknown-elf-objdump
 
 
+PROGRAM = fir_benchmark
+
+ASM = software/$(PROGRAM).S
+ELF = software/$(PROGRAM).elf
+BIN = software/$(PROGRAM).bin
+HEX = programs/$(PROGRAM).hex
+
+
+TOP = tb_riscv_cpu
+
+
 RTL = \
 	rtl/cpu/alu.sv \
 	rtl/cpu/regfile.sv \
@@ -21,86 +32,58 @@ RTL = \
 	rtl/cpu/riscv_cpu.sv
 
 
-.PHONY: \
-	all \
-	soc-test \
-	benchmark \
-	fir \
-	mmio \
-	clean
+TB = tb/tb_riscv_cpu.sv
 
 
-all: soc-test
+.PHONY: all program disasm sim run fir mmio clean
 
 
-soc-test:
+all: program sim
+
+
+program:
 > $(RISCV_GCC) \
 	-march=rv32i \
 	-mabi=ilp32 \
 	-nostdlib \
 	-nostartfiles \
 	-Ttext=0x0 \
-	software/fir_test.S \
-	-o software/fir_test.elf
+	$(ASM) \
+	-o $(ELF)
 
 > $(RISCV_OBJCOPY) \
 	-O binary \
-	software/fir_test.elf \
-	software/fir_test.bin
+	$(ELF) \
+	$(BIN)
 
 > python3 scripts/bin2hex.py \
-	software/fir_test.bin \
-	programs/fir_test.hex
+	$(BIN) \
+	$(HEX)
 
-> cp programs/fir_test.hex programs/program.hex
+> @echo ""
+> @echo "Generated $(HEX)"
+> @echo ""
 
-> rm -rf obj_dir
 
+disasm: program
+> $(RISCV_OBJDUMP) -d $(ELF)
+
+
+sim:
 > $(VERILATOR) \
 	--binary \
 	--timing \
 	-Wall \
 	-Wno-fatal \
 	$(RTL) \
-	tb/tb_riscv_cpu.sv \
-	--top-module tb_riscv_cpu
+	$(TB) \
+	--top-module $(TOP)
 
-> ./obj_dir/Vtb_riscv_cpu
+> ./obj_dir/V$(TOP)
 
 
-benchmark:
-> $(RISCV_GCC) \
-	-march=rv32i \
-	-mabi=ilp32 \
-	-nostdlib \
-	-nostartfiles \
-	-Ttext=0x0 \
-	software/fir_benchmark.S \
-	-o software/fir_benchmark.elf
-
-> $(RISCV_OBJCOPY) \
-	-O binary \
-	software/fir_benchmark.elf \
-	software/fir_benchmark.bin
-
-> python3 scripts/bin2hex.py \
-	software/fir_benchmark.bin \
-	programs/fir_benchmark.hex
-
-> cp programs/fir_benchmark.hex programs/program.hex
-
-> rm -rf obj_dir
-
-> $(VERILATOR) \
-	--binary \
-	--timing \
-	-Wall \
-	-Wno-fatal \
-	$(RTL) \
-	tb/tb_fir_benchmark.sv \
-	--top-module tb_fir_benchmark
-
-> ./obj_dir/Vtb_fir_benchmark
+run:
+> ./obj_dir/V$(TOP)
 
 
 fir:
@@ -137,8 +120,5 @@ mmio:
 
 clean:
 > rm -rf obj_dir
-
 > rm -f software/*.elf
 > rm -f software/*.bin
-
-> rm -f programs/program.hex

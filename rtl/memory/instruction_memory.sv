@@ -6,12 +6,10 @@ module instruction_memory (
     logic [31:0] memory [0:255];
 
     initial begin
-
         $readmemh(
-            "programs/fir_test.hex",
+            "programs/program.hex",
             memory
         );
-
     end
 
     assign instruction =
