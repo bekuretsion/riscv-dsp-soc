@@ -2,9 +2,9 @@
 # DESCRIPTION: Verilator output: Makefile for building Verilated archive or executable
 #
 # Execute this makefile from the object directory:
-#    make -f Vtb_mmio_interconnect.mk
+#    make -f Vtb_riscv_cpu.mk
 
-default: Vtb_mmio_interconnect
+default: Vtb_riscv_cpu
 
 ### Constants...
 # Perl executable (from $PERL, defaults to 'perl' if not set)
@@ -32,9 +32,9 @@ VM_SC_TARGET_ARCH = linux
 
 ### Vars...
 # Design prefix (from --prefix)
-VM_PREFIX = Vtb_mmio_interconnect
+VM_PREFIX = Vtb_riscv_cpu
 # Module prefix (from --prefix)
-VM_MODPREFIX = Vtb_mmio_interconnect
+VM_MODPREFIX = Vtb_riscv_cpu
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
 	-DVL_TIME_CONTEXT \
@@ -52,7 +52,7 @@ VM_USER_DIR = \
 
 ### Default rules...
 # Include list of all generated classes
-include Vtb_mmio_interconnect_classes.mk
+include Vtb_riscv_cpu_classes.mk
 # Include global rules
 include $(VERILATOR_ROOT)/include/verilated.mk
 
@@ -61,7 +61,7 @@ VPATH += $(VM_USER_DIR)
 
 
 ### Link rules... (from --exe)
-Vtb_mmio_interconnect: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
+Vtb_riscv_cpu: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
 	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) $(LIBS) $(SC_LIBS) -o $@
 
 

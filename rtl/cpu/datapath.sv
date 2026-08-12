@@ -8,6 +8,8 @@ module datapath (
     input  logic        mem_to_reg,
 
     input  logic        jump,
+    input  logic        lui,
+
     input  logic [31:0] pc_plus_4,
 
     input  logic [4:0]  rs1_addr,
@@ -35,10 +37,6 @@ module datapath (
     logic [31:0] writeback_data;
 
 
-    // ========================================
-    // REGISTER FILE
-    // ========================================
-
     regfile rf (
         .clk(clk),
         .we(we),
@@ -54,17 +52,9 @@ module datapath (
     );
 
 
-    // ========================================
-    // ALU INPUT MUX
-    // ========================================
-
     assign alu_b =
         alu_src ? immediate : rs2_data;
 
-
-    // ========================================
-    // ALU
-    // ========================================
 
     alu alu_unit (
         .a(rs1_data),
@@ -77,17 +67,11 @@ module datapath (
     );
 
 
-    // ========================================
-    // MEMORY-MAPPED INTERCONNECT
-    // ========================================
-
     mmio_interconnect mmio (
         .clk(clk),
         .reset(reset),
 
         .mem_write(mem_write),
-
-        // A load instruction requests a read
         .mem_read(mem_to_reg),
 
         .address(alu_result),
@@ -100,25 +84,13 @@ module datapath (
     );
 
 
-    // ========================================
-    // REGISTER WRITEBACK
-    // ========================================
-    //
-    // JAL:
-    //     rd <- PC + 4
-    //
-    // LW:
-    //     rd <- memory/MMIO
-    //
-    // Other arithmetic:
-    //     rd <- ALU
-    //
-    // ========================================
-
     always_comb begin
 
         if (jump)
             writeback_data = pc_plus_4;
+
+        else if (lui)
+            writeback_data = immediate;
 
         else if (mem_to_reg)
             writeback_data = mem_read_data;

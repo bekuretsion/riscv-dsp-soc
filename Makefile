@@ -1,11 +1,22 @@
 .RECIPEPREFIX := >
 
 VERILATOR = verilator
+
 RISCV_GCC = riscv64-unknown-elf-gcc
 RISCV_OBJCOPY = riscv64-unknown-elf-objcopy
 RISCV_OBJDUMP = riscv64-unknown-elf-objdump
 
+
+PROGRAM = fir_test
+
+ASM = software/$(PROGRAM).S
+ELF = software/$(PROGRAM).elf
+BIN = software/$(PROGRAM).bin
+HEX = programs/$(PROGRAM).hex
+
+
 TOP = tb_riscv_cpu
+
 
 RTL = \
 	rtl/cpu/alu.sv \
@@ -20,12 +31,8 @@ RTL = \
 	rtl/memory/instruction_memory.sv \
 	rtl/cpu/riscv_cpu.sv
 
-TB = tb/tb_riscv_cpu.sv
 
-ASM = software/loop.S
-ELF = software/loop.elf
-BIN = software/loop.bin
-HEX = programs/loop.hex
+TB = tb/tb_riscv_cpu.sv
 
 
 .PHONY: all program disasm sim run fir mmio clean
@@ -49,7 +56,9 @@ program:
 	$(ELF) \
 	$(BIN)
 
-> python3 scripts/bin2hex.py
+> python3 scripts/bin2hex.py \
+	$(BIN) \
+	$(HEX)
 
 > @echo ""
 > @echo "Generated $(HEX)"
@@ -111,5 +120,5 @@ mmio:
 
 clean:
 > rm -rf obj_dir
-> rm -f $(ELF)
-> rm -f $(BIN)
+> rm -f software/*.elf
+> rm -f software/*.bin

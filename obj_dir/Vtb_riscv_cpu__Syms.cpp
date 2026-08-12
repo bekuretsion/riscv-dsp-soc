@@ -1,16 +1,16 @@
 // Verilated -*- C++ -*-
 // DESCRIPTION: Verilator output: Symbol table implementation internals
 
-#include "Vtb_mmio_interconnect__pch.h"
-#include "Vtb_mmio_interconnect.h"
-#include "Vtb_mmio_interconnect___024root.h"
+#include "Vtb_riscv_cpu__pch.h"
+#include "Vtb_riscv_cpu.h"
+#include "Vtb_riscv_cpu___024root.h"
 
 // FUNCTIONS
-Vtb_mmio_interconnect__Syms::~Vtb_mmio_interconnect__Syms()
+Vtb_riscv_cpu__Syms::~Vtb_riscv_cpu__Syms()
 {
 }
 
-Vtb_mmio_interconnect__Syms::Vtb_mmio_interconnect__Syms(VerilatedContext* contextp, const char* namep, Vtb_mmio_interconnect* modelp)
+Vtb_riscv_cpu__Syms::Vtb_riscv_cpu__Syms(VerilatedContext* contextp, const char* namep, Vtb_riscv_cpu* modelp)
     : VerilatedSyms{contextp}
     // Setup internal state of the Syms class
     , __Vm_modelp{modelp}
@@ -18,7 +18,7 @@ Vtb_mmio_interconnect__Syms::Vtb_mmio_interconnect__Syms(VerilatedContext* conte
     , TOP{this, namep}
 {
         // Check resources
-        Verilated::stackCheck(266);
+        Verilated::stackCheck(258);
     // Configure time unit / time precision
     _vm_contextp__->timeunit(-12);
     _vm_contextp__->timeprecision(-12);
@@ -26,5 +26,5 @@ Vtb_mmio_interconnect__Syms::Vtb_mmio_interconnect__Syms(VerilatedContext* conte
     // Setup each module's pointer back to symbol table (for public functions)
     TOP.__Vconfigure(true);
     // Setup scopes
-    __Vscope_tb_mmio_interconnect.configure(this, name(), "tb_mmio_interconnect", "tb_mmio_interconnect", "<null>", -12, VerilatedScope::SCOPE_OTHER);
+    __Vscope_tb_riscv_cpu.configure(this, name(), "tb_riscv_cpu", "tb_riscv_cpu", "<null>", -12, VerilatedScope::SCOPE_OTHER);
 }

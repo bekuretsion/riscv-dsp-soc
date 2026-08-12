@@ -7,7 +7,11 @@ module tb_riscv_cpu;
     logic [31:0] instruction;
     logic [31:0] alu_result;
 
+    logic fir_selected;
+    logic fir_done;
+
     integer cycle_count;
+
 
     riscv_cpu dut (
         .clk(clk),
@@ -15,47 +19,36 @@ module tb_riscv_cpu;
 
         .pc(pc),
         .instruction(instruction),
-        .alu_result(alu_result)
+        .alu_result(alu_result),
+
+        .fir_selected(fir_selected),
+        .fir_done(fir_done)
     );
 
 
-    // ========================================
-    // CLOCK
-    // ========================================
-
     initial begin
-        clk = 0;
+        clk = 1'b0;
         forever #5 clk = ~clk;
     end
 
 
-    // ========================================
-    // TEST
-    // ========================================
-
     initial begin
 
         $display("==============================");
-        $display("       BNE + JAL TEST");
+        $display("      CPU -> FIR SOC TEST");
         $display("==============================");
 
-        reset = 1;
+        reset = 1'b1;
         cycle_count = 0;
 
-        @(posedge clk);
-        #1;
+        repeat (2)
+            @(posedge clk);
 
-        reset = 0;
+        reset = 1'b0;
 
 
-        // Run enough cycles to:
-        //
-        // 1. execute the BNE loop
-        // 2. set x7 = 99
-        // 3. reach JAL at PC=20
-        // 4. verify PC remains 20
-
-        repeat (16) begin
+        // Run enough cycles for all MMIO accesses
+        repeat (25) begin
 
             @(posedge clk);
             #1;
@@ -63,66 +56,88 @@ module tb_riscv_cpu;
             cycle_count = cycle_count + 1;
 
             $display(
-                "cycle=%0d PC=%0d INST=%h x5=%0d x6=%0d x7=%0d",
+                "cycle=%0d PC=%0d INST=%h x10=%h x9=%0d FIR=%b",
                 cycle_count,
                 pc,
                 instruction,
-                dut.core.dp.rf.registers[5],
-                dut.core.dp.rf.registers[6],
-                dut.core.dp.rf.registers[7]
+                dut.core.dp.rf.registers[10],
+                dut.core.dp.rf.registers[9],
+                fir_selected
             );
 
         end
 
 
         // ========================================
-        // VERIFY LOOP
+        // CHECK LUI
         // ========================================
 
-        if (dut.core.dp.rf.registers[5] !== 32'd5)
+        if (
+            dut.core.dp.rf.registers[10]
+            !== 32'h4000_0000
+        )
             $fatal(
-                "FAIL: expected x5=5, got %0d",
-                dut.core.dp.rf.registers[5]
-            );
-
-        if (dut.core.dp.rf.registers[6] !== 32'd5)
-            $fatal(
-                "FAIL: expected x6=5, got %0d",
-                dut.core.dp.rf.registers[6]
-            );
-
-        if (dut.core.dp.rf.registers[7] !== 32'd99)
-            $fatal(
-                "FAIL: expected x7=99, got %0d",
-                dut.core.dp.rf.registers[7]
+                "FAIL: x10 expected 0x40000000"
             );
 
 
         // ========================================
-        // VERIFY JAL
+        // CHECK FIR COEFFICIENTS
+        // ========================================
+
+        if (
+            dut.core.dp.mmio.fir.coeff0
+            !== 32'sd1
+        )
+            $fatal("FAIL: coeff0");
+
+        if (
+            dut.core.dp.mmio.fir.coeff1
+            !== 32'sd2
+        )
+            $fatal("FAIL: coeff1");
+
+        if (
+            dut.core.dp.mmio.fir.coeff2
+            !== 32'sd3
+        )
+            $fatal("FAIL: coeff2");
+
+        if (
+            dut.core.dp.mmio.fir.coeff3
+            !== 32'sd4
+        )
+            $fatal("FAIL: coeff3");
+
+
+        // ========================================
+        // CHECK FIR RESULT
         //
-        // done:
-        //     j done
+        // first sample:
         //
-        // PC should remain 20.
+        // 10*1 + 0 + 0 + 0 = 10
         // ========================================
 
-        if (pc !== 32'd20)
+        if (
+            dut.core.dp.rf.registers[9]
+            !== 32'd10
+        )
             $fatal(
-                "FAIL: JAL expected PC=20, got %0d",
-                pc
+                "FAIL: FIR result expected 10, got %0d",
+                dut.core.dp.rf.registers[9]
             );
 
 
         $display("");
-        $display("PASS: BNE loop executed correctly");
-        $display("PASS: x5 = 5");
-        $display("PASS: x6 = 5");
-        $display("PASS: x7 = 99");
-        $display("PASS: JAL keeps PC at 20");
+        $display("PASS: LUI generated 0x40000000");
+        $display("PASS: CPU wrote FIR coefficients");
+        $display("PASS: CPU wrote FIR sample");
+        $display("PASS: CPU started accelerator");
+        $display("PASS: CPU read FIR result");
+        $display("PASS: x9 = 10");
 
         $display("==============================");
-        $display("      BNE + JAL PASS");
+        $display("      CPU -> FIR SOC PASS");
         $display("==============================");
 
         $finish;

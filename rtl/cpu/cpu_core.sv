@@ -11,7 +11,6 @@ module cpu_core (
     output logic        jump,
 
     output logic        zero,
-
     output logic [31:0] immediate,
 
     output logic        fir_selected,
@@ -24,21 +23,16 @@ module cpu_core (
 
     logic alu_src;
     logic reg_write;
-
     logic mem_write;
     logic mem_to_reg;
+    logic lui;
 
     logic [3:0] alu_ctrl;
 
     logic [31:0] rs1_data;
     logic [31:0] rs2_data;
-
     logic [31:0] mem_read_data;
 
-
-    // ========================================
-    // DECODER
-    // ========================================
 
     decoder dec (
         .instruction(instruction),
@@ -50,7 +44,6 @@ module cpu_core (
         .immediate(immediate),
 
         .alu_src(alu_src),
-
         .reg_write(reg_write),
 
         .mem_write(mem_write),
@@ -59,14 +52,11 @@ module cpu_core (
         .branch_type(branch_type),
 
         .jump(jump),
+        .lui(lui),
 
         .alu_ctrl(alu_ctrl)
     );
 
-
-    // ========================================
-    // DATAPATH
-    // ========================================
 
     datapath dp (
         .clk(clk),
@@ -78,6 +68,8 @@ module cpu_core (
         .mem_to_reg(mem_to_reg),
 
         .jump(jump),
+        .lui(lui),
+
         .pc_plus_4(pc_plus_4),
 
         .rs1_addr(rs1_addr),
@@ -93,7 +85,6 @@ module cpu_core (
         .rs2_data(rs2_data),
 
         .alu_result(alu_result),
-
         .mem_read_data(mem_read_data),
 
         .zero(zero),

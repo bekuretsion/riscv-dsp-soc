@@ -6,9 +6,15 @@ module instruction_memory (
     logic [31:0] memory [0:255];
 
     initial begin
-        $readmemh("programs/loop.hex", memory);
+
+        $readmemh(
+            "programs/fir_test.hex",
+            memory
+        );
+
     end
 
-    assign instruction = memory[address[9:2]];
+    assign instruction =
+        memory[address[9:2]];
 
 endmodule

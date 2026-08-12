@@ -3,11 +3,11 @@
 //
 // Internal details; most user sources do not need this header,
 // unless using verilator public meta comments.
-// Suggest use Vtb_mmio_interconnect.h instead.
+// Suggest use Vtb_riscv_cpu.h instead.
 
 
-#ifndef VERILATED_VTB_MMIO_INTERCONNECT__PCH_H_
-#define VERILATED_VTB_MMIO_INTERCONNECT__PCH_H_  // guard
+#ifndef VERILATED_VTB_RISCV_CPU__PCH_H_
+#define VERILATED_VTB_RISCV_CPU__PCH_H_  // guard
 
 // GCC and Clang only will precompile headers (PCH) for the first header.
 // So, make sure this is the one and only PCH.
@@ -20,8 +20,8 @@
 
 #include "verilated.h"
 
-#include "Vtb_mmio_interconnect__Syms.h"
-#include "Vtb_mmio_interconnect.h"
+#include "Vtb_riscv_cpu__Syms.h"
+#include "Vtb_riscv_cpu.h"
 
 // Additional include files added using '--compiler-include'
 
