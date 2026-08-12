@@ -15,30 +15,31 @@ VL_INLINE_OPT VlCoroutine Vtb_riscv_cpu___024root___eval_initial__TOP__Vtiming__
     IData/*31:0*/ tb_riscv_cpu__DOT__cycle_count;
     tb_riscv_cpu__DOT__cycle_count = 0;
     // Body
-    VL_WRITEF_NX("==============================\n        BNE LOOP TEST\n==============================\n",0);
+    VL_WRITEF_NX("==============================\n       BNE + JAL TEST\n==============================\n",0);
     vlSelfRef.tb_riscv_cpu__DOT__reset = 1U;
     tb_riscv_cpu__DOT__cycle_count = 0U;
     co_await vlSelfRef.__VtrigSched_h6588643f__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_riscv_cpu.clk)", 
                                                          "tb/tb_riscv_cpu.sv", 
-                                                         35);
+                                                         45);
     co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
                                          "tb/tb_riscv_cpu.sv", 
-                                         36);
+                                         46);
     vlSelfRef.tb_riscv_cpu__DOT__reset = 0U;
     co_await vlSelfRef.__VtrigSched_h6588643f__0.trigger(0U, 
                                                          nullptr, 
                                                          "@(posedge tb_riscv_cpu.clk)", 
                                                          "tb/tb_riscv_cpu.sv", 
-                                                         42);
+                                                         60);
     co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
                                          "tb/tb_riscv_cpu.sv", 
-                                         43);
+                                         61);
     tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
-    VL_WRITEF_NX("cycle=%0d PC=%0# x5=%0# x6=%0# x7=%0#\n",0,
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
                  32,tb_riscv_cpu__DOT__cycle_count,
                  32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
                  32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
@@ -47,14 +48,15 @@ VL_INLINE_OPT VlCoroutine Vtb_riscv_cpu___024root___eval_initial__TOP__Vtiming__
                                                          nullptr, 
                                                          "@(posedge tb_riscv_cpu.clk)", 
                                                          "tb/tb_riscv_cpu.sv", 
-                                                         42);
+                                                         60);
     co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
                                          "tb/tb_riscv_cpu.sv", 
-                                         43);
+                                         61);
     tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
-    VL_WRITEF_NX("cycle=%0d PC=%0# x5=%0# x6=%0# x7=%0#\n",0,
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
                  32,tb_riscv_cpu__DOT__cycle_count,
                  32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
                  32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
@@ -63,14 +65,15 @@ VL_INLINE_OPT VlCoroutine Vtb_riscv_cpu___024root___eval_initial__TOP__Vtiming__
                                                          nullptr, 
                                                          "@(posedge tb_riscv_cpu.clk)", 
                                                          "tb/tb_riscv_cpu.sv", 
-                                                         42);
+                                                         60);
     co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
                                          "tb/tb_riscv_cpu.sv", 
-                                         43);
+                                         61);
     tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
-    VL_WRITEF_NX("cycle=%0d PC=%0# x5=%0# x6=%0# x7=%0#\n",0,
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
                  32,tb_riscv_cpu__DOT__cycle_count,
                  32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
                  32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
@@ -79,14 +82,15 @@ VL_INLINE_OPT VlCoroutine Vtb_riscv_cpu___024root___eval_initial__TOP__Vtiming__
                                                          nullptr, 
                                                          "@(posedge tb_riscv_cpu.clk)", 
                                                          "tb/tb_riscv_cpu.sv", 
-                                                         42);
+                                                         60);
     co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
                                          "tb/tb_riscv_cpu.sv", 
-                                         43);
+                                         61);
     tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
-    VL_WRITEF_NX("cycle=%0d PC=%0# x5=%0# x6=%0# x7=%0#\n",0,
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
                  32,tb_riscv_cpu__DOT__cycle_count,
                  32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
                  32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
@@ -95,14 +99,15 @@ VL_INLINE_OPT VlCoroutine Vtb_riscv_cpu___024root___eval_initial__TOP__Vtiming__
                                                          nullptr, 
                                                          "@(posedge tb_riscv_cpu.clk)", 
                                                          "tb/tb_riscv_cpu.sv", 
-                                                         42);
+                                                         60);
     co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
                                          "tb/tb_riscv_cpu.sv", 
-                                         43);
+                                         61);
     tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
-    VL_WRITEF_NX("cycle=%0d PC=%0# x5=%0# x6=%0# x7=%0#\n",0,
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
                  32,tb_riscv_cpu__DOT__cycle_count,
                  32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
                  32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
@@ -111,14 +116,15 @@ VL_INLINE_OPT VlCoroutine Vtb_riscv_cpu___024root___eval_initial__TOP__Vtiming__
                                                          nullptr, 
                                                          "@(posedge tb_riscv_cpu.clk)", 
                                                          "tb/tb_riscv_cpu.sv", 
-                                                         42);
+                                                         60);
     co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
                                          "tb/tb_riscv_cpu.sv", 
-                                         43);
+                                         61);
     tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
-    VL_WRITEF_NX("cycle=%0d PC=%0# x5=%0# x6=%0# x7=%0#\n",0,
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
                  32,tb_riscv_cpu__DOT__cycle_count,
                  32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
                  32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
@@ -127,14 +133,15 @@ VL_INLINE_OPT VlCoroutine Vtb_riscv_cpu___024root___eval_initial__TOP__Vtiming__
                                                          nullptr, 
                                                          "@(posedge tb_riscv_cpu.clk)", 
                                                          "tb/tb_riscv_cpu.sv", 
-                                                         42);
+                                                         60);
     co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
                                          "tb/tb_riscv_cpu.sv", 
-                                         43);
+                                         61);
     tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
-    VL_WRITEF_NX("cycle=%0d PC=%0# x5=%0# x6=%0# x7=%0#\n",0,
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
                  32,tb_riscv_cpu__DOT__cycle_count,
                  32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
                  32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
@@ -143,14 +150,15 @@ VL_INLINE_OPT VlCoroutine Vtb_riscv_cpu___024root___eval_initial__TOP__Vtiming__
                                                          nullptr, 
                                                          "@(posedge tb_riscv_cpu.clk)", 
                                                          "tb/tb_riscv_cpu.sv", 
-                                                         42);
+                                                         60);
     co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
                                          "tb/tb_riscv_cpu.sv", 
-                                         43);
+                                         61);
     tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
-    VL_WRITEF_NX("cycle=%0d PC=%0# x5=%0# x6=%0# x7=%0#\n",0,
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
                  32,tb_riscv_cpu__DOT__cycle_count,
                  32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
                  32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
@@ -159,14 +167,15 @@ VL_INLINE_OPT VlCoroutine Vtb_riscv_cpu___024root___eval_initial__TOP__Vtiming__
                                                          nullptr, 
                                                          "@(posedge tb_riscv_cpu.clk)", 
                                                          "tb/tb_riscv_cpu.sv", 
-                                                         42);
+                                                         60);
     co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
                                          "tb/tb_riscv_cpu.sv", 
-                                         43);
+                                         61);
     tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
-    VL_WRITEF_NX("cycle=%0d PC=%0# x5=%0# x6=%0# x7=%0#\n",0,
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
                  32,tb_riscv_cpu__DOT__cycle_count,
                  32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
                  32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
@@ -175,14 +184,15 @@ VL_INLINE_OPT VlCoroutine Vtb_riscv_cpu___024root___eval_initial__TOP__Vtiming__
                                                          nullptr, 
                                                          "@(posedge tb_riscv_cpu.clk)", 
                                                          "tb/tb_riscv_cpu.sv", 
-                                                         42);
+                                                         60);
     co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
                                          "tb/tb_riscv_cpu.sv", 
-                                         43);
+                                         61);
     tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
-    VL_WRITEF_NX("cycle=%0d PC=%0# x5=%0# x6=%0# x7=%0#\n",0,
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
                  32,tb_riscv_cpu__DOT__cycle_count,
                  32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
                  32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
@@ -191,14 +201,15 @@ VL_INLINE_OPT VlCoroutine Vtb_riscv_cpu___024root___eval_initial__TOP__Vtiming__
                                                          nullptr, 
                                                          "@(posedge tb_riscv_cpu.clk)", 
                                                          "tb/tb_riscv_cpu.sv", 
-                                                         42);
+                                                         60);
     co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
                                          "tb/tb_riscv_cpu.sv", 
-                                         43);
+                                         61);
     tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
-    VL_WRITEF_NX("cycle=%0d PC=%0# x5=%0# x6=%0# x7=%0#\n",0,
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
                  32,tb_riscv_cpu__DOT__cycle_count,
                  32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
                  32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
@@ -207,14 +218,15 @@ VL_INLINE_OPT VlCoroutine Vtb_riscv_cpu___024root___eval_initial__TOP__Vtiming__
                                                          nullptr, 
                                                          "@(posedge tb_riscv_cpu.clk)", 
                                                          "tb/tb_riscv_cpu.sv", 
-                                                         42);
+                                                         60);
     co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
                                          "tb/tb_riscv_cpu.sv", 
-                                         43);
+                                         61);
     tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
-    VL_WRITEF_NX("cycle=%0d PC=%0# x5=%0# x6=%0# x7=%0#\n",0,
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
                  32,tb_riscv_cpu__DOT__cycle_count,
                  32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
                  32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
@@ -223,44 +235,102 @@ VL_INLINE_OPT VlCoroutine Vtb_riscv_cpu___024root___eval_initial__TOP__Vtiming__
                                                          nullptr, 
                                                          "@(posedge tb_riscv_cpu.clk)", 
                                                          "tb/tb_riscv_cpu.sv", 
-                                                         42);
+                                                         60);
     co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
                                          "tb/tb_riscv_cpu.sv", 
-                                         43);
+                                         61);
     tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
-    VL_WRITEF_NX("cycle=%0d PC=%0# x5=%0# x6=%0# x7=%0#\n",0,
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
                  32,tb_riscv_cpu__DOT__cycle_count,
                  32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
+                 [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
+                 [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
+                 [7U]);
+    co_await vlSelfRef.__VtrigSched_h6588643f__0.trigger(0U, 
+                                                         nullptr, 
+                                                         "@(posedge tb_riscv_cpu.clk)", 
+                                                         "tb/tb_riscv_cpu.sv", 
+                                                         60);
+    co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
+                                         "tb/tb_riscv_cpu.sv", 
+                                         61);
+    tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
+                 32,tb_riscv_cpu__DOT__cycle_count,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
+                 [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
+                 [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
+                 [7U]);
+    co_await vlSelfRef.__VtrigSched_h6588643f__0.trigger(0U, 
+                                                         nullptr, 
+                                                         "@(posedge tb_riscv_cpu.clk)", 
+                                                         "tb/tb_riscv_cpu.sv", 
+                                                         60);
+    co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
+                                         "tb/tb_riscv_cpu.sv", 
+                                         61);
+    tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
+                 32,tb_riscv_cpu__DOT__cycle_count,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
+                 [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
+                 [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
+                 [7U]);
+    co_await vlSelfRef.__VtrigSched_h6588643f__0.trigger(0U, 
+                                                         nullptr, 
+                                                         "@(posedge tb_riscv_cpu.clk)", 
+                                                         "tb/tb_riscv_cpu.sv", 
+                                                         60);
+    co_await vlSelfRef.__VdlySched.delay(1ULL, nullptr, 
+                                         "tb/tb_riscv_cpu.sv", 
+                                         61);
+    tb_riscv_cpu__DOT__cycle_count = ((IData)(1U) + tb_riscv_cpu__DOT__cycle_count);
+    VL_WRITEF_NX("cycle=%0d PC=%0# INST=%x x5=%0# x6=%0# x7=%0#\n",0,
+                 32,tb_riscv_cpu__DOT__cycle_count,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__pc,
+                 32,vlSelfRef.tb_riscv_cpu__DOT__instruction,
                  32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [5U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [6U],32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                  [7U]);
     if (VL_UNLIKELY((5U != vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                      [5U]))) {
-        VL_WRITEF_NX("[%0t] %%Fatal: tb_riscv_cpu.sv:59: Assertion failed in %Ntb_riscv_cpu: %10#\n",0,
+        VL_WRITEF_NX("[%0t] %%Fatal: tb_riscv_cpu.sv:83: Assertion failed in %Ntb_riscv_cpu: %10#\n",0,
                      64,VL_TIME_UNITED_Q(1),-12,vlSymsp->name(),
                      32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                      [5U]);
-        VL_STOP_MT("tb/tb_riscv_cpu.sv", 59, "", false);
+        VL_STOP_MT("tb/tb_riscv_cpu.sv", 83, "", false);
     }
     if (VL_UNLIKELY((5U != vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                      [6U]))) {
-        VL_WRITEF_NX("[%0t] %%Fatal: tb_riscv_cpu.sv:65: Assertion failed in %Ntb_riscv_cpu: %10#\n",0,
+        VL_WRITEF_NX("[%0t] %%Fatal: tb_riscv_cpu.sv:89: Assertion failed in %Ntb_riscv_cpu: %10#\n",0,
                      64,VL_TIME_UNITED_Q(1),-12,vlSymsp->name(),
                      32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                      [6U]);
-        VL_STOP_MT("tb/tb_riscv_cpu.sv", 65, "", false);
+        VL_STOP_MT("tb/tb_riscv_cpu.sv", 89, "", false);
     }
     if (VL_UNLIKELY((0x63U != vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                      [7U]))) {
-        VL_WRITEF_NX("[%0t] %%Fatal: tb_riscv_cpu.sv:71: Assertion failed in %Ntb_riscv_cpu: %10#\n",0,
+        VL_WRITEF_NX("[%0t] %%Fatal: tb_riscv_cpu.sv:95: Assertion failed in %Ntb_riscv_cpu: %10#\n",0,
                      64,VL_TIME_UNITED_Q(1),-12,vlSymsp->name(),
                      32,vlSelfRef.tb_riscv_cpu__DOT__dut__DOT__core__DOT__dp__DOT__rf__DOT__registers
                      [7U]);
-        VL_STOP_MT("tb/tb_riscv_cpu.sv", 71, "", false);
+        VL_STOP_MT("tb/tb_riscv_cpu.sv", 95, "", false);
     }
-    VL_WRITEF_NX("\nPASS: loop executed correctly\nPASS: x5 counted from 0 to 5\nPASS: BNE exited when x5 == x6\nPASS: x7 = 99\n==============================\n       BNE LOOP PASS\n==============================\n",0);
-    VL_FINISH_MT("tb/tb_riscv_cpu.sv", 86, "");
+    if (VL_UNLIKELY((0x14U != vlSelfRef.tb_riscv_cpu__DOT__pc))) {
+        VL_WRITEF_NX("[%0t] %%Fatal: tb_riscv_cpu.sv:111: Assertion failed in %Ntb_riscv_cpu: %10#\n",0,
+                     64,VL_TIME_UNITED_Q(1),-12,vlSymsp->name(),
+                     32,vlSelfRef.tb_riscv_cpu__DOT__pc);
+        VL_STOP_MT("tb/tb_riscv_cpu.sv", 111, "", false);
+    }
+    VL_WRITEF_NX("\nPASS: BNE loop executed correctly\nPASS: x5 = 5\nPASS: x6 = 5\nPASS: x7 = 99\nPASS: JAL keeps PC at 20\n==============================\n      BNE + JAL PASS\n==============================\n",0);
+    VL_FINISH_MT("tb/tb_riscv_cpu.sv", 128, "");
 }
 
 #ifdef VL_DEBUG
