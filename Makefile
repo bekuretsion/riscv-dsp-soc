@@ -26,6 +26,7 @@ RTL = \
 	soc-test \
 	benchmark \
 	fair-benchmark \
+	scaling-benchmark \
 	fir \
 	mmio \
 	clean
@@ -35,7 +36,7 @@ all: soc-test
 
 
 # ============================================================
-# CPU -> FIR SOC REGRESSION
+# CPU -> FIR SOC TEST
 # ============================================================
 
 soc-test:
@@ -74,7 +75,7 @@ soc-test:
 
 
 # ============================================================
-# ORIGINAL FIR BENCHMARK
+# ORIGINAL BENCHMARK
 # ============================================================
 
 benchmark:
@@ -113,7 +114,7 @@ benchmark:
 
 
 # ============================================================
-# FAIR MULTI-SAMPLE FIR BENCHMARK
+# FAIR 8-SAMPLE BENCHMARK
 # ============================================================
 
 fair-benchmark:
@@ -135,9 +136,7 @@ fair-benchmark:
 	software/fir_fair_benchmark.bin \
 	programs/fir_fair_benchmark.hex
 
-> cp \
-	programs/fir_fair_benchmark.hex \
-	programs/program.hex
+> cp programs/fir_fair_benchmark.hex programs/program.hex
 
 > rm -rf obj_dir
 
@@ -154,7 +153,48 @@ fair-benchmark:
 
 
 # ============================================================
-# FIR ACCELERATOR UNIT TEST
+# 8 / 16 / 32 SAMPLE SCALING BENCHMARK
+# ============================================================
+
+scaling-benchmark:
+> $(RISCV_GCC) \
+	-march=rv32i \
+	-mabi=ilp32 \
+	-nostdlib \
+	-nostartfiles \
+	-Ttext=0x0 \
+	software/fir_scaling_benchmark.S \
+	-o software/fir_scaling_benchmark.elf
+
+> $(RISCV_OBJCOPY) \
+	-O binary \
+	software/fir_scaling_benchmark.elf \
+	software/fir_scaling_benchmark.bin
+
+> python3 scripts/bin2hex.py \
+	software/fir_scaling_benchmark.bin \
+	programs/fir_scaling_benchmark.hex
+
+> cp \
+	programs/fir_scaling_benchmark.hex \
+	programs/program.hex
+
+> rm -rf obj_dir
+
+> $(VERILATOR) \
+	--binary \
+	--timing \
+	-Wall \
+	-Wno-fatal \
+	$(RTL) \
+	tb/tb_fir_scaling_benchmark.sv \
+	--top-module tb_fir_scaling_benchmark
+
+> ./obj_dir/Vtb_fir_scaling_benchmark
+
+
+# ============================================================
+# FIR UNIT TEST
 # ============================================================
 
 fir:
@@ -173,7 +213,7 @@ fir:
 
 
 # ============================================================
-# MMIO INTERCONNECT TEST
+# MMIO TEST
 # ============================================================
 
 mmio:
