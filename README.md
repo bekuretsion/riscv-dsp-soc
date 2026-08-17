@@ -1,5 +1,6 @@
 # RISC-V DSP SoC with FIR Hardware Accelerator
 
+
 A small RISC-V System-on-Chip implemented in SystemVerilog, featuring a custom RV32I CPU, memory-mapped RAM, and a hardware FIR DSP accelerator.
 
 The project demonstrates the complete path from software running on a RISC-V processor to a memory-mapped hardware accelerator, including RTL implementation, assembly programs, Verilator simulation, waveform verification, and software-vs-hardware performance benchmarking.
