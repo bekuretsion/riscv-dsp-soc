@@ -8,6 +8,7 @@ The project demonstrates the complete path from software running on a RISC-V pro
 ---
 
 ## Project Overview
+8
 
 The SoC contains:
 
